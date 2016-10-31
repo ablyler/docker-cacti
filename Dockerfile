@@ -1,4 +1,4 @@
-FROM nginx:1.10.1-alpine
+FROM djdefi/rpi-nginx:alpine
 LABEL mantainer="Giuseppe Iannelli"
 
 ########### ENVS ###########
