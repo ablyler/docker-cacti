@@ -30,6 +30,11 @@ update_spine_config() {
     fi
 }
 
+update_rra_path() {
+    mkdir -p /usr/share/nginx/cacti/rra/backup/ /usr/share/nginx/cacti/rra/archive/ \
+    && chown -R nginx:nginx /usr/local/spine/
+}
+
 spine_db_update() {
     set -x \
     && mysql -h $DB_HOSTNAME -u$DB_USERNAME -p $DB_PASSWORD -e "REPLACE INTO cacti.settings SET name='path_spine', value='/usr/local/spine/bin/spine';" \
@@ -45,5 +50,6 @@ if [ "$1" = "cacti" ];then
   && update_virtual_host \
   && update_cacti_db_config \
   && update_spine_config \
+  && update_rra_path \
   && start_supervisord
 fi
