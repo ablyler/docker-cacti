@@ -32,7 +32,7 @@ update_spine_config() {
 
 update_rra_path() {
     mkdir -p /usr/share/nginx/cacti/rra/backup/ /usr/share/nginx/cacti/rra/archive/ \
-    && chown -R nginx:nginx /usr/local/rra/
+    && chown -R nginx:nginx /usr/share/nginx/cacti/rra/
 }
 
 spine_db_update() {
