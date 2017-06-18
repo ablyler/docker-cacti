@@ -53,6 +53,14 @@ RUN set -x \
 ########### REMOVE SPINE DEPS ###########
 RUN apk del .spine-build-deps
 
+
+# install mikrotik plugin
+
+RUN wget --no-check-certificate https://github.com/Cacti/plugin_mikrotik/archive/master.zip \
+&& unzip master.zip \
+&& rm master.zip \
+&& mv plugin_mikrotik-master /usr/share/nginx/cacti/plugins/mikrotik
+
 ########### SETUP NGINX, PHP-FPM ###########
 COPY docker/ /docker/
 RUN set -x \
