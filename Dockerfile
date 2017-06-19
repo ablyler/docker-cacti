@@ -2,7 +2,7 @@ FROM djdefi/rpi-nginx:alpine
 LABEL mantainer="Giuseppe Iannelli"
 
 ########### ENVS ###########
-ENV CACTI_VERSION=1.1.0 \
+ENV CACTI_VERSION=1.1.1 \
 SNMP_PORT=161 \
 SNMP_PORT_PROTO=udp \
 DB_TYPE=mysql \
