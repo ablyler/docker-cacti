@@ -72,7 +72,8 @@ RUN wget --no-check-certificate http://docs.cacti.net/_media/usertemplate:data:a
 && rm -rf usertemplate_apcupsd
 
 # install flow (aka netflow)
-RUN apk add flowd-tools
+RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing'
+RUN apk add --update flowd-tools@testing
 RUN wget -O flowview-v1.1-1.tgz http://docs.cacti.net/_media/plugin:flowview-v1.1-1.tgz \
 && tar xfz flowview-v1.1-1.tgz && rm plugin:flowview-v1.1-1.tgz \
 && mv flowview/flow-capture /etc/init.d/ \
