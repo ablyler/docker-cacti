@@ -13,7 +13,7 @@ DB_SSL=false
 RUN apk add --no-cache --virtual .static_deps \
 python supervisor openssl \
 php5 php5-fpm php5-dom php5-gd php5-gmp php5-json php5-ldap php5-mysql php5-mysqli php5-odbc php5-openssl \
-php5-pdo php5-pdo_mysql php5-pdo_odbc php5-pear php5-posix php5-snmp php5-sockets php5-xml php5-zlib \
+php5-pdo php5-pdo_mysql php5-pdo_odbc php5-pear php5-posix php5-snmp php5-sockets php5-xml php5-zlib php5-ctype \
 net-snmp net-snmp-dev net-snmp-tools net-snmp-libs net-snmp-agent-libs \
 mariadb-client mysql-client mariadb-client-libs mariadb-dev \
 rrdtool rrdtool-cached rrdtool-cgi rrdtool-utils wget patch help2man
@@ -53,13 +53,24 @@ RUN set -x \
 ########### REMOVE SPINE DEPS ###########
 RUN apk del .spine-build-deps
 
-
 # install mikrotik plugin
 
 RUN wget --no-check-certificate https://github.com/Cacti/plugin_mikrotik/archive/master.zip \
 && unzip master.zip \
 && rm master.zip \
 && mv plugin_mikrotik-master /usr/share/nginx/cacti/plugins/mikrotik
+
+
+# install apcupsd
+RUN apk add apcupsd
+RUN wget --no-check-certificate http://docs.cacti.net/_media/usertemplate:data:apc:apcupsd:apcupsd_1.1.zip \
+&& mkdir usertemplate_apcupsd \
+&& unzip -d usertemplate_apcupsd usertemplate:data:apc:apcupsd:apcupsd_1.1.zip \
+&& rm usertemplate:data:apc:apcupsd:apcupsd_1.1.zip \
+&& sed 's,$APCACCESS_PATH = ".*";,$APCACCESS_PATH = "/sbin/";,g' -iphp usertemplate_apcupsd/query_apcupsd.php \
+&& cp usertemplate_apcupsd/query_* /usr/share/nginx/cacti/scripts/ \
+&& rm -rf usertemplate_apcupsd
+
 
 ########### SETUP NGINX, PHP-FPM ###########
 COPY docker/ /docker/
