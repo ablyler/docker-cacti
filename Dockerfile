@@ -9,7 +9,7 @@ DB_TYPE=mysql \
 DB_PORT=3306 \
 DB_SSL=false
 
-RUN echo 'http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
+RUN echo 'http://nl.alpinelinux.org/alpine/edge/testing' > /etc/apk/repositories
 RUN echo 'http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories
 
 ########### INSTALL PHP, MYSQL, SNMP, SUPERVISORD ###########
