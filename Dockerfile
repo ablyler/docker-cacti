@@ -13,7 +13,7 @@ DB_SSL=false
 RUN apk add --no-cache --virtual .static_deps \
 python supervisor openssl \
 php5 php5-fpm php5-dom php5-gd php5-gmp php5-json php5-ldap php5-mysql php5-mysqli php5-odbc php5-openssl \
-php5-pdo php5-pdo_mysql php5-pdo_odbc php5-pear php5-posix php5-snmp php5-sockets php5-xml php5-zlib \
+php5-pdo php5-pdo_mysql php5-pdo_odbc php5-pear php5-posix php5-snmp php5-sockets php5-xml php5-zlib php5-ctype \
 net-snmp net-snmp-dev net-snmp-tools net-snmp-libs net-snmp-agent-libs \
 mariadb-client mysql-client mariadb-client-libs mariadb-dev \
 rrdtool rrdtool-cached rrdtool-cgi rrdtool-utils wget patch help2man
