@@ -53,13 +53,24 @@ RUN set -x \
 ########### REMOVE SPINE DEPS ###########
 RUN apk del .spine-build-deps
 
-
 # install mikrotik plugin
 
 RUN wget --no-check-certificate https://github.com/Cacti/plugin_mikrotik/archive/master.zip \
 && unzip master.zip \
 && rm master.zip \
 && mv plugin_mikrotik-master /usr/share/nginx/cacti/plugins/mikrotik
+
+
+# install apcupsd
+RUN apk add apcupsd
+RUN wget --no-check-certificate http://docs.cacti.net/_media/usertemplate:data:apc:apcupsd:apcupsd_1.1.zip \
+&& mkdir usertemplate_apcupsd \
+&& unzip -d usertemplate_apcupsd usertemplate:data:apc:apcupsd:apcupsd_1.1.zip \
+&& rm usertemplate:data:apc:apcupsd:apcupsd_1.1.zip \
+&& sed 's,$APCACCESS_PATH = ".*";,$APCACCESS_PATH = "/sbin/";,g' -iphp usertemplate_apcupsd/query_apcupsd.php \
+&& cp usertemplate_apcupsd/query_* /usr/share/nginx/cacti/scripts/ \
+&& rm -rf usertemplate_apcupsd
+
 
 ########### SETUP NGINX, PHP-FPM ###########
 COPY docker/ /docker/
