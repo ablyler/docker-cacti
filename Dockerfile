@@ -75,7 +75,7 @@ RUN wget --no-check-certificate http://docs.cacti.net/_media/usertemplate:data:a
 && rm -rf usertemplate_apcupsd
 
 # install flow (aka netflow)
-RUN apk add --update flowd-tools@testing python2@testing
+RUN apk add --update flowd-tools
 RUN wget -O flowview-v1.1-1.tgz http://docs.cacti.net/_media/plugin:flowview-v1.1-1.tgz \
 && tar xfz flowview-v1.1-1.tgz && rm plugin:flowview-v1.1-1.tgz \
 && mv flowview/flow-capture /etc/init.d/ \
